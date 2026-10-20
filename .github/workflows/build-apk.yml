@@ -13,6 +13,9 @@ jobs:
         with: { node-version: 22, cache: npm }
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: '17' }
+      - uses: android-actions/setup-android@v3
+        continue-on-error: true
+      - run: yes | sdkmanager --licenses && sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
       - run: npm ci
       - run: npx cap sync android
       - run: cd android && chmod +x gradlew && ./gradlew assembleDebug
@@ -30,6 +33,9 @@ jobs:
         with: { node-version: 22, cache: npm }
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: '17' }
+      - uses: android-actions/setup-android@v3
+        continue-on-error: true
+      - run: yes | sdkmanager --licenses && sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
       - run: npm ci && npx cap sync android
       - name: Check signing secrets
         id: signing
