@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Ruang Kerja</string>
+    <string name="title_activity_main">Ruang Kerja</string>
+    <string name="package_name">com.mariskatools.ruangkerja</string>
+    <string name="custom_url_scheme">com.mariskatools.ruangkerja</string>
+</resources>

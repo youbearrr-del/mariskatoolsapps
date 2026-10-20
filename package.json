@@ -1,0 +1,23 @@
+{
+  "name": "ruang-kerja-app",
+  "version": "1.0.0",
+  "description": "Capacitor Android and PWA wrapper for Ruang Kerja",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tools/verify-config.mjs",
+    "cap:sync": "npx cap sync android",
+    "android:debug": "cd android && gradlew.bat assembleDebug"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@capacitor/android": "8.5.3",
+    "@capacitor/app": "8.0.1",
+    "@capacitor/core": "8.5.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.3"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "appId": "com.mariskatools.ruangkerja",
+  "appName": "Ruang Kerja",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https",
+    "allowNavigation": [
+      "*.firebaseapp.com",
+      "*.googleapis.com",
+      "*.firebaseio.com",
+      "*.supabase.co",
+      "*.gstatic.com",
+      "*.youtube.com",
+      "*.jsdelivr.net",
+      "*.cloudflare.com",
+      "cdn.tailwindcss.com"
+    ]
+  }
+}

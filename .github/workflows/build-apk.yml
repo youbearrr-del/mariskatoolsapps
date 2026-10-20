@@ -1,0 +1,52 @@
+name: Build Ruang Kerja APK
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - uses: android-actions/setup-android@v3
+      - run: yes | sdkmanager --licenses && sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+      - run: npm ci
+      - run: npx cap sync android
+      - run: cd android && chmod +x gradlew && ./gradlew assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ruang-kerja-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+
+  release-signed:
+    if: ${{ github.event_name == 'workflow_dispatch' && secrets.KEYSTORE_BASE64 != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - uses: android-actions/setup-android@v3
+      - run: yes | sdkmanager --licenses && sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+      - run: npm ci && npx cap sync android
+      - name: Build signed release APK
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 --decode > android/app/release.keystore
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease -Pandroid.injected.signing.store.file=release.keystore -Pandroid.injected.signing.store.password="$KEYSTORE_PASSWORD" -Pandroid.injected.signing.key.alias="$KEY_ALIAS" -Pandroid.injected.signing.key.password="$KEY_PASSWORD"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ruang-kerja-release-apk
+          path: android/app/build/outputs/apk/release/app-release.apk
