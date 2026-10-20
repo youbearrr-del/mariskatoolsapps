@@ -15,7 +15,7 @@ jobs:
         with: { distribution: temurin, java-version: '17' }
       - uses: android-actions/setup-android@v3
         continue-on-error: true
-      - run: yes | sdkmanager --licenses && sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+      - run: yes | sdkmanager --licenses && sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
         continue-on-error: true
       - run: npm ci
       - run: npx cap sync android
@@ -36,7 +36,7 @@ jobs:
         with: { distribution: temurin, java-version: '17' }
       - uses: android-actions/setup-android@v3
         continue-on-error: true
-      - run: yes | sdkmanager --licenses && sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+      - run: yes | sdkmanager --licenses && sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
         continue-on-error: true
       - run: npm ci && npx cap sync android
       - name: Check signing secrets
