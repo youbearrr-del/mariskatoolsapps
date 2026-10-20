@@ -21,7 +21,7 @@ cd android
 .\gradlew.bat assembleDebug
 ```
 
-APK berada di `android/app/build/outputs/apk/debug/app-debug.apk`. `versionCode` adalah `1`, `versionName` dan `APP_VERSION` HTML adalah `1.0.0`. Untuk menaikkan versi, ubah keduanya bersama-sama, tingkatkan `versionCode`, jalankan sync, lalu build ulang.
+APK berada di `android/app/build/outputs/apk/debug/app-debug.apk`. `versionCode` adalah `1`, `versionName` dan `APP_VERSION` HTML adalah `1.0.0`. Minimum Android yang didukung adalah API 24 (Android 7.0), karena framework Cordova bawaan Capacitor 8 tidak lagi mendukung API 23. Untuk menaikkan versi, ubah keduanya bersama-sama, tingkatkan `versionCode`, jalankan sync, lalu build ulang.
 
 ## PWA iPhone dan Android
 

@@ -1,5 +1,6 @@
 ext {
-    minSdkVersion = 23
+    // Capacitor 8's Cordova framework requires Android API 24 or newer.
+    minSdkVersion = 24
     compileSdkVersion = 36
     targetSdkVersion = 36
     androidxActivityVersion = '1.11.0'
